@@ -12,6 +12,12 @@ public class Conversor extends javax.swing.JFrame {
     /**
      * Creates new form Conversor
      */
+    double datos,resultado,round;
+ 
+    int eleccion1,eleccion2;
+    
+    
+    
     public Conversor() {
         initComponents();
     }
@@ -25,21 +31,152 @@ public class Conversor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Datos = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        Eleccion1 = new javax.swing.JComboBox<>();
+        Eleccion2 = new javax.swing.JComboBox<>();
+        Cacular = new javax.swing.JButton();
+        Result = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("Conversor"); // NOI18N
+
+        jLabel1.setText("Introduce Importe:");
+
+        Eleccion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GTQ", "USD", "EUR", "PESO MX" }));
+        Eleccion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eleccion1ActionPerformed(evt);
+            }
+        });
+
+        Eleccion2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GTQ", "USD", "EUR", "PESO MX" }));
+
+        Cacular.setText("Calcular");
+        Cacular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CacularActionPerformed(evt);
+            }
+        });
+
+        Result.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+
+        jLabel2.setText("Convertir a:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Eleccion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Eleccion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(Cacular))
+                    .addComponent(Result, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Eleccion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Eleccion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cacular))
+                .addGap(18, 18, 18)
+                .addComponent(Result, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Eleccion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eleccion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Eleccion1ActionPerformed
+
+    private void CacularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CacularActionPerformed
+        datos = Double.parseDouble(Datos.getText());
+        eleccion1 = Eleccion1.getSelectedIndex();
+        eleccion2 = Eleccion2.getSelectedIndex();
+        
+        
+        // Coincidencias iguales no se realiza ninguna calculo
+       if (eleccion1 == 0 && eleccion2 == 0){
+           Result.setText("Resultado:"+ datos+"GTQ");
+       }else if(eleccion1 == 1 && eleccion2 == 1){
+           Result.setText("Resultado:"+ datos+"USD");
+       }else if(eleccion1 == 2 && eleccion2 == 2){
+           Result.setText("Resultado:"+ datos+"EUR");
+       }else if(eleccion1 == 2 && eleccion2 == 2){
+           Result.setText("Resultado:"+ datos+"MXN");
+       }
+       
+       //Quetzales
+       if(eleccion1 == 0 && eleccion2 == 1){
+           resultado = datos / 7.67;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"USD");
+       }else if(eleccion1 == 0 && eleccion2 == 2){
+           resultado = datos / 8.10;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"EUR");
+       }else if(eleccion1 == 0 && eleccion2 == 3){
+           resultado = datos * 2.62;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"MXN");
+       }else if(eleccion1 == 1  && eleccion2 == 0){
+           resultado = datos * 7.67;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"GTQ");
+       }else if(eleccion1 == 2 && eleccion2 == 0){
+           resultado = datos * 8.10;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"GTQ");
+       }else if(eleccion1 == 3 && eleccion2 == 0){
+           resultado = datos / 2.62;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"GTQ");
+           
+       //Dolares   
+       }else if(eleccion1 == 1 && eleccion2 == 2){
+           resultado = datos *0.94 ;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"EUR");
+       }else if(eleccion1 == 1 && eleccion2 == 3){
+           resultado = datos *20.14;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"MXN");       
+       }else if(eleccion1 == 2 && eleccion2 == 1){
+           resultado = datos *  1.06;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"USD");
+       }else if(eleccion1 == 3 && eleccion2 == 1){
+           resultado = datos *0.050 ;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"USD");
+        
+       //Euros              
+       }else if(eleccion1 == 2 && eleccion2 == 3){
+           resultado = datos * 21.26 ;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"MXN");
+       }else if(eleccion1 == 3 && eleccion2 == 2){
+           resultado = datos / 21.26 ;
+           Result.setText("Resultado:"+ Math.round(resultado*100.0)/100.0+"EUR");
+        
+           
+       //Pesos Mexicanos
+       
+       }
+       
+    }//GEN-LAST:event_CacularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +214,12 @@ public class Conversor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cacular;
+    private javax.swing.JTextField Datos;
+    private javax.swing.JComboBox<String> Eleccion1;
+    private javax.swing.JComboBox<String> Eleccion2;
+    private javax.swing.JLabel Result;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
